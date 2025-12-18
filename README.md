@@ -33,3 +33,4 @@ Uses the provided `vercel.json` (static build, output `dist/`). If you link the 
 - Compose the provided payment-schedule email in the Message Editor.
 - Click **Run compliance check** to see risk flags, policy citations (Payments Policy v3.2, Anti-Money Laundering Guidance 2024), and recommended fixes.
 - Click **Apply safer wording** to auto-rewrite the draft with safer language.
+- Toggle light/dark mode from the header (state is remembered locally).

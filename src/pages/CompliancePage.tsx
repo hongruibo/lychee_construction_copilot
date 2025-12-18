@@ -60,6 +60,7 @@ type PersistedState = {
   context: ContextSelection;
   to: string;
   subject: string;
+  theme?: 'light' | 'dark';
 };
 
 const CompliancePage = () => {
@@ -73,6 +74,7 @@ const CompliancePage = () => {
   const [analysis, setAnalysis] = useState<AnalysisResult | undefined>();
   const [loading, setLoading] = useState(false);
   const [hasRun, setHasRun] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
     try {
@@ -85,6 +87,7 @@ const CompliancePage = () => {
         setTo(parsed.to || 'roofing.contractor@example.com');
         setSubject(parsed.subject || 'Payment schedule confirmation');
         setHasRun(Boolean(parsed.analysis));
+        setTheme(parsed.theme || 'light');
       }
     } catch (error) {
       console.error('Failed to load saved state', error);
@@ -92,9 +95,13 @@ const CompliancePage = () => {
   }, []);
 
   useEffect(() => {
-    const payload: PersistedState = { body, analysis, context, to, subject };
+    const payload: PersistedState = { body, analysis, context, to, subject, theme };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-  }, [body, analysis, context, to, subject]);
+  }, [body, analysis, context, to, subject, theme]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const handleRunCheck = () => {
     if (!body.trim()) return;
@@ -113,7 +120,9 @@ const CompliancePage = () => {
 
   return (
     <AppLayout
-      header={<Header />}
+      header={
+        <Header theme={theme} onToggleTheme={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))} />
+      }
       contextBar={
         <ContextBar
           project={context.project}
