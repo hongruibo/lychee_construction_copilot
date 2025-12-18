@@ -1,31 +1,35 @@
 # Lychee Construction Copilot
 
-Single-page, static UI for the Lychee Copilot for Construction demo. Built as a Vercel-ready static site with no build step required.
+React + TypeScript demo for a construction compliance copilot that checks messages for policy risks, flags issues, and suggests fixes.
 
-## Structure
-- `index.html` — the full UI and styling.
-- `vercel.json` — Vercel config to serve the static page.
+## Tech stack
+- React 18 + TypeScript
+- Vite for dev/build
+- Plain CSS (no additional UI frameworks)
 
 ## Run locally
 ```bash
 cd lychee_construction_copilot
-python -m http.server 3000
-# open http://localhost:3000
+npm install
+npm run dev
+# open the localhost URL printed by Vite
+```
+
+## Build / preview
+```bash
+npm run build
+npm run preview
 ```
 
 ## Deploy to Vercel
 ```bash
-cd lychee_construction_copilot
+npm run build
 vercel --prod
 ```
-Choose "Other" when prompted for the framework; no build command; output directory `/`.
+Uses the provided `vercel.json` (static build, output `dist/`). If you link the GitHub repo in Vercel, pushes to `main` will auto-deploy.
 
-## Publish to GitHub
-```bash
-cd lychee_construction_copilot
-git init
-git add .
-git commit -m "Init Lychee Construction Copilot UI"
-git remote add origin git@github.com:<your_username>/lychee_construction_copilot.git
-git push -u origin main
-```
+## Demo scenario
+- Context: `Project: Riverside Housing`, `Role: Site Supervisor`.
+- Compose the provided payment-schedule email in the Message Editor.
+- Click **Run compliance check** to see risk flags, policy citations (Payments Policy v3.2, Anti-Money Laundering Guidance 2024), and recommended fixes.
+- Click **Apply safer wording** to auto-rewrite the draft with safer language.
