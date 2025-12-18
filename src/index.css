@@ -141,14 +141,18 @@ body {
 }
 
 .brand-mark {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent);
-  background: rgba(0, 112, 243, 0.08);
-  border-radius: 10px;
+}
+
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(16%) sepia(93%) saturate(1895%) hue-rotate(197deg) brightness(93%) contrast(97%);
 }
 
 .brand-name {
